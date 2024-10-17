@@ -1,5 +1,6 @@
 package dev.lpa;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
@@ -27,8 +28,32 @@ public class Main {
     System.out.println(matcher.find() + ": " + sentence);
     System.out.println("Matched Ending Index: " + matcher.end());
     System.out.println("Matched on : " + sentence.substring(matcher.start(), matcher.end()));
-    System.out.println("Matched on : " + matcher.group());  // returns subsequence of prev. match
+    System.out.println("Matched on : " + matcher.group() + "\n");  // returns subsequence of prev. match
 
+    String htmlSnippet = """
+      <H1>My Heading</H1>
+      <h2>Sub-heading</h2>
+      <p>This is a paragraph about something.</p>
+      <p>This is another paragraph about something else.</p>
+      <h3>Summary</h3>
+      """;
 
+    Pattern htmlPattern = Pattern.compile("<(?<level>[hH]\\d)>(.*)</[hH]\\d>");
+    Matcher htmlMatcher = htmlPattern.matcher(htmlSnippet);
+
+    while (htmlMatcher.find()) {
+      System.out.println("Group: " + htmlMatcher.group());
+      System.out.println("Group (0):" + htmlMatcher.group(0));
+      System.out.println("Group (1): " + htmlMatcher.group("level")); // named-capturing group
+      System.out.println("Group (2): " + htmlMatcher.group(2)); // capturing group 2
+      System.out.println("index = " + htmlMatcher.start("level"));
+      System.out.println();
+    }
+    System.out.println("------------------------");
+
+//    htmlMatcher.reset();
+//    htmlMatcher.results()
+//      .map(MatchResult::group)
+//      .forEach(System.out::println);
   }
 }
