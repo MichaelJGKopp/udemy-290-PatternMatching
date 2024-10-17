@@ -26,7 +26,9 @@ public class Main {
     matcher.reset();  // since find starts where the matcher ended before
     System.out.println(matcher.find() + ": " + sentence);
     System.out.println("Matched Ending Index: " + matcher.end());
-    System.out.println("Matched on : " +
-      sentence.substring(matcher.start(), matcher.end()));
+    System.out.println("Matched on : " + sentence.substring(matcher.start(), matcher.end()));
+    System.out.println("Matched on : " + matcher.group());  // returns subsequence of prev. match
+
+
   }
 }
