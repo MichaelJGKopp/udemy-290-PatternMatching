@@ -67,8 +67,9 @@ public class Main {
       .forEach(System.out::println);
     System.out.println("========================\n");
     
-    htmlMatcher.reset();
-    String updatedSnippet = htmlMatcher.replaceFirst("First Header");
+    htmlMatcher.reset();  // not necessary
+    String updatedSnippet = htmlMatcher.replaceFirst((mr) ->
+      "<em>" + mr.group(2) + "</em>");
     System.out.println("-----------------------");
     System.out.println(updatedSnippet);
     System.out.println("Start " + htmlMatcher.start() + " : End " + htmlMatcher.end());
