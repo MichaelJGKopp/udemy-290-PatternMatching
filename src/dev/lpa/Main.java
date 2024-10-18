@@ -65,6 +65,15 @@ public class Main {
     tabbedText.lines()
       .flatMap(s -> Pattern.compile("\\t").splitAsStream(s))
       .forEach(System.out::println);
+    System.out.println("========================\n");
     
+    htmlMatcher.reset();
+    String updatedSnippet = htmlMatcher.replaceFirst("First Header");
+    System.out.println("-----------------------");
+    System.out.println(updatedSnippet);
+    System.out.println("Start " + htmlMatcher.start() + " : End " + htmlMatcher.end());
+    System.out.println("Start to End: " + htmlSnippet.substring(htmlMatcher.start(),
+      htmlMatcher.end()));
+    System.out.println("Group 2: " + htmlMatcher.group(2));
   }
 }
