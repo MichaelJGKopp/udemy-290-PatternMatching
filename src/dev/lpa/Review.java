@@ -34,7 +34,7 @@ public class Review {
     
     System.out.println("--------------------------------------");
     String htmlSnippet = """
-      <H1>My Heading</H1>
+      <H1>My Heading</h1>
       <h2>Sub-heading</h2>
       <p>This is a paragraph about something.</p>
       <p style = "abc">This is another paragraph about something else.</p>
@@ -44,12 +44,13 @@ public class Review {
       """;
     
 //    Pattern htmlPattern = Pattern.compile(
-//      "<([^><]*)>(?<text>[</>]*)(</[^><]>)*");
-    Pattern htmlPattern = Pattern.compile(
-      "<(\\w+)[^>]*>(?<text>[^\\v</>]*)(</\\1>)*");
+//      "<(\\w+)[^>]*>(?<text>[^\\v</>]*)((?i)</\\1>)*"); // (?i) in group ignore case
+     Pattern htmlPattern = Pattern.compile(
+      "<(\\w+)[^>]*>(?<text>[^\\v</>]*)(</\\1>)*", Pattern.CASE_INSENSITIVE);
     
     htmlPattern.matcher(htmlSnippet)
       .results()
+      .filter(mr -> mr.group(1).toLowerCase().startsWith("h"))
       .map(mr ->
              "Full text: " + mr.group(0) +
              "\n\t Type: " + mr.group(1) +
