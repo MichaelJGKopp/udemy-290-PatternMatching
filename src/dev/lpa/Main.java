@@ -51,9 +51,20 @@ public class Main {
     }
     System.out.println("------------------------");
 
-//    htmlMatcher.reset();
-//    htmlMatcher.results()
-//      .map(MatchResult::group)
-//      .forEach(System.out::println);
+    htmlMatcher.reset();
+    htmlMatcher.results()
+      .forEach(mr -> System.out.println(mr.group(1) + " " + mr.group(2)));
+    System.out.println("------------------------");
+
+    String tabbedText = """
+      group1\tgroup2\tgroup3
+      1\t2\t3
+      a\tb\tc
+      """;
+
+    tabbedText.lines()
+      .flatMap(s -> Pattern.compile("\\t").splitAsStream(s))
+      .forEach(System.out::println);
+    
   }
 }
