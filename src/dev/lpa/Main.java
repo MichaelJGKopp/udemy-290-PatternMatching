@@ -76,5 +76,17 @@ public class Main {
     System.out.println("Start to End: " + htmlSnippet.substring(htmlMatcher.start(),
       htmlMatcher.end()));
     System.out.println("Group 2: " + htmlMatcher.group(2));
+    System.out.println("-----------------------");
+    
+    htmlMatcher.usePattern(Pattern.compile("<([hH]\\d)>(.*)</\\1>")); // back reference
+    
+    htmlMatcher.reset();
+    System.out.println("Using Back Reference: \n" +
+                        htmlMatcher.replaceFirst("<em>$2</em>"));
+    System.out.println("------------------------");
+    
+    String replacedHTML = htmlMatcher.replaceAll((mr) ->
+                                                       "<em>" + mr.group(2) + "</em>");
+    System.out.println(replacedHTML);
   }
 }
